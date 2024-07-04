@@ -1,4 +1,4 @@
-package com.example.customersapi.entity;
+package com.example.customersapi.models;
 
 
 import jakarta.persistence.*;
