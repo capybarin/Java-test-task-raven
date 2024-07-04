@@ -14,8 +14,11 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
     List<Customer> findCustomersByIsActiveTrue();
     Customer getCustomerById(Integer id);
-    /*Customer save(Customer customer);
-    Customer updateById(Integer id, Customer updatedCustomer);*/
+
+    Customer save(Customer customer);
+    //Customer updateById(Integer id, Customer updatedCustomer);*/
+
+
     @Transactional
     @Modifying
     @Query(value = "UPDATE customers SET is_active=FALSE WHERE id=:id", nativeQuery = true)

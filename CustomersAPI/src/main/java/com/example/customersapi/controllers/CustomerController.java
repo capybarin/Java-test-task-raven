@@ -2,6 +2,7 @@ package com.example.customersapi.controllers;
 
 import com.example.customersapi.models.Customer;
 import com.example.customersapi.services.CustomerServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -29,5 +30,10 @@ public class CustomerController {
     @DeleteMapping(path = "/api/customers/{id}", consumes = "application/json", produces = "application/json")
     public void deleteCustomer(@PathVariable Integer id){
         customerServiceImpl.setIsActiveFalse(id);
+    }
+
+    @PostMapping(path = "/api/customers", consumes = "application/json", produces = "application/json")
+    public Customer createCustomer(@Valid @RequestBody Customer customer){
+        return customerServiceImpl.save(customer);
     }
 }
