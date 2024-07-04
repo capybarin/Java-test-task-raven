@@ -17,8 +17,8 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    public List<Customer> findAll(){
-        return customerRepository.findAll();
+    public List<Customer> findCustomersByIsActiveTrue(){
+        return customerRepository.findCustomersByIsActiveTrue();
     }
 
     @Override

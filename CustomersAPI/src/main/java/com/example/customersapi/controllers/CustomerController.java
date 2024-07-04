@@ -19,7 +19,7 @@ public class CustomerController {
 
     @GetMapping(path = "/api/customers", consumes = "application/json", produces = "application/json")
     public List<Customer> listCustomers(){
-        return customerServiceImpl.findAll();
+        return customerServiceImpl.findCustomersByIsActiveTrue();
     }
 
     @GetMapping(path = "/api/customers/{id}", consumes = "application/json", produces = "application/json")

@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
-    List<Customer> findAll();
+    List<Customer> findCustomersByIsActiveTrue();
     Customer getCustomerById(Integer id);
     /*Customer save(Customer customer);
     Customer updateById(Integer id, Customer updatedCustomer);

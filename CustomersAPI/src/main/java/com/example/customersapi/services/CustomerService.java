@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface CustomerService {
 
-    List<Customer> findAll();
+    List<Customer> findCustomersByIsActiveTrue();
     Customer getCustomerById(Integer id);
 }
