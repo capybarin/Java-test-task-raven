@@ -36,4 +36,10 @@ public class CustomerController {
     public Customer createCustomer(@Valid @RequestBody Customer customer){
         return customerServiceImpl.save(customer);
     }
+
+    @PutMapping(path = "/api/customers/{id}", consumes = "application/json", produces = "application/json")
+    public Customer updateCustomer(@Valid @RequestBody Customer customer, @PathVariable Integer id){
+        customerServiceImpl.updateCustomer(id, customer);
+        return customerServiceImpl.getCustomerById(id);
+    }
 }

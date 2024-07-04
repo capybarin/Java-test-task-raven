@@ -8,7 +8,7 @@ public interface CustomerService {
 
     List<Customer> findCustomersByIsActiveTrue();
     Customer getCustomerById(Integer id);
-
+    void updateCustomer(Integer id, Customer customer);
     Customer save(Customer customer);
     void setIsActiveFalse(Integer id);
 }

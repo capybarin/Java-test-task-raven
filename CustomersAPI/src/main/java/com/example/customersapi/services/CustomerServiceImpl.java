@@ -16,7 +16,6 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-
     @Override
     public List<Customer> findCustomersByIsActiveTrue(){
         return customerRepository.findCustomersByIsActiveTrue();
@@ -35,11 +34,22 @@ public class CustomerServiceImpl implements CustomerService {
         tmpCustomer.setFullName(customer.getFullName());
         tmpCustomer.setEmail(customer.getEmail());
         tmpCustomer.setIsActive(true);
-        tmpCustomer.setCreated((int) Instant.now().toEpochMilli());
-        tmpCustomer.setUpdated((int) Instant.now().toEpochMilli());
+        tmpCustomer.setCreated((int) Instant.now().getEpochSecond());
+        tmpCustomer.setUpdated((int) Instant.now().getEpochSecond());
         tmpCustomer.setPhone(customer.getPhone());
 
         return customerRepository.save(tmpCustomer);
+    }
+
+    @Override
+    public void updateCustomer(Integer id, Customer customer) {
+        if(customerRepository.getCustomerById(id) == null) throw new NotFoundException("Customer", id);
+        Customer existingCustomer = customerRepository.getCustomerById(id);
+        existingCustomer.setPhone(customer.getPhone());
+        existingCustomer.setFullName(customer.getFullName());
+        existingCustomer.setUpdated((int) Instant.now().getEpochSecond());
+
+        customerRepository.updateCustomer(id, existingCustomer);
     }
 
     @Override
