@@ -5,6 +5,7 @@ import com.example.customersapi.services.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -18,7 +19,11 @@ public class CustomerController {
 
     @GetMapping(path = "/api/customers", consumes = "application/json", produces = "application/json")
     public List<Customer> listCustomers(){
-        System.out.println("here");
         return customerServiceImpl.findAll();
+    }
+
+    @GetMapping(path = "/api/customers/{id}", consumes = "application/json", produces = "application/json")
+    public Customer getCustomer(@PathVariable Integer id){
+        return customerServiceImpl.getCustomerById(id);
     }
 }

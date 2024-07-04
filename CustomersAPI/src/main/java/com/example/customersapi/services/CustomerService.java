@@ -7,4 +7,5 @@ import java.util.List;
 public interface CustomerService {
 
     List<Customer> findAll();
+    Customer getCustomerById(Integer id);
 }
