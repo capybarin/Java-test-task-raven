@@ -1,15 +1,14 @@
 package com.example.customersapi.models;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @ToString
 @Entity
-@NoArgsConstructor
 @Table(name = "customers")
 public class Customer {
 
@@ -23,11 +22,13 @@ public class Customer {
     @Getter
     @Setter
     @Column(name = "created")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Integer created;
 
     @Getter
     @Setter
     @Column(name = "updated")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Integer updated;
 
     @Getter
@@ -48,5 +49,6 @@ public class Customer {
     @Getter
     @Setter
     @Column(name = "is_active")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Boolean isActive;
 }
