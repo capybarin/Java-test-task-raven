@@ -8,4 +8,5 @@ public interface CustomerService {
 
     List<Customer> findCustomersByIsActiveTrue();
     Customer getCustomerById(Integer id);
+    void setIsActiveFalse(Integer id);
 }
