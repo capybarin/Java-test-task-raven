@@ -24,7 +24,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer getCustomerById(Integer id) {
-        if(customerRepository.getCustomerById(id) == null) throw new NotFoundException();
+        if(customerRepository.getCustomerById(id) == null) throw new NotFoundException("Customer", id);
         return customerRepository.getCustomerById(id);
     }
 
@@ -44,7 +44,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void setIsActiveFalse(Integer id) {
-        if(customerRepository.getCustomerById(id) == null) throw new NotFoundException();
+        if(customerRepository.getCustomerById(id) == null) throw new NotFoundException("Customer", id);
         customerRepository.setIsActiveFalse(id);
     }
 

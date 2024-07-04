@@ -23,10 +23,20 @@ public class ValidationExceptionHandler {
         ex.getAllErrors().forEach(err -> errors.add(err.getDefaultMessage()));
 
         Map<String, Object> result = new HashMap<>();
-        result.put("status", ex.getStatusCode());
+        result.put("status", HttpStatus.BAD_REQUEST);
         result.put("errors", errors);
         result.put("timestamp", ZonedDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
 
         return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<?> notFound(NotFoundException ex){
+        Map<String, Object> result = new HashMap<>();
+        result.put("status", HttpStatus.NOT_FOUND);
+        result.put("error", ex.getMessage());
+        result.put("timestamp", ZonedDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+
+        return new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
     }
 }
