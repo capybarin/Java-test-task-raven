@@ -12,21 +12,27 @@ import java.util.List;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-
     @Autowired
     private CustomerRepository customerRepository;
 
+
+    //Returns all customer with is_active=true, skips others
     @Override
     public List<Customer> findCustomersByIsActiveTrue(){
         return customerRepository.findCustomersByIsActiveTrue();
     }
 
+
+    //Returns a customer by ID, throws a 404 error if not found
     @Override
     public Customer getCustomerById(Integer id) {
         if(customerRepository.getCustomerById(id) == null) throw new NotFoundException("Customer", id);
+
         return customerRepository.getCustomerById(id);
     }
 
+
+    //Saves a customer, writes only fullName, email and phone fields, others are being filled automatically
     @Override
     public Customer save(Customer customer) {
         Customer tmpCustomer = new Customer();
@@ -41,9 +47,12 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.save(tmpCustomer);
     }
 
+
+    //Updates a customer, writes only fullName and phone, ignores other fields
     @Override
     public void updateCustomer(Integer id, Customer customer) {
         if(customerRepository.getCustomerById(id) == null) throw new NotFoundException("Customer", id);
+
         Customer existingCustomer = customerRepository.getCustomerById(id);
         existingCustomer.setPhone(customer.getPhone());
         existingCustomer.setFullName(customer.getFullName());
@@ -52,11 +61,12 @@ public class CustomerServiceImpl implements CustomerService {
         customerRepository.updateCustomer(id, existingCustomer);
     }
 
+
+    //Marks a customer as is_active=false
     @Override
     public void setIsActiveFalse(Integer id) {
         if(customerRepository.getCustomerById(id) == null) throw new NotFoundException("Customer", id);
+
         customerRepository.setIsActiveFalse(id);
     }
-
-
 }

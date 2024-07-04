@@ -16,6 +16,7 @@ import java.util.Map;
 @ControllerAdvice
 public class ValidationExceptionHandler {
 
+    //Handler for validation exceptions
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> notValid(MethodArgumentNotValidException ex) {
         List<String> errors = new ArrayList<>();
@@ -30,9 +31,11 @@ public class ValidationExceptionHandler {
         return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
     }
 
+    //Handler for HTTP 404 exception
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<?> notFound(NotFoundException ex){
         Map<String, Object> result = new HashMap<>();
+
         result.put("status", HttpStatus.NOT_FOUND);
         result.put("error", ex.getMessage());
         result.put("timestamp", ZonedDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
