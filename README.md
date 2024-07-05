@@ -18,7 +18,7 @@ List of tools used:
 The app contains 5 endpoints for all CRUD operations.
 
 - GET {host}/api/customers - returns all customers with is_active=true.
-Does not require any input.
+Does not require any input.\
 Example response:\
 [\
 &emsp;{\
@@ -29,7 +29,7 @@ Example response:\
 &emsp;}\
 ]
 - GET {host}/api/customers/{id} - returns a single customer by ID.\
-`ID` is mandatory and an error will thrown if not provided.
+`ID` is mandatory and an error will thrown if not provided.\
 Example response:\
 {\
 &emsp;"id": 6,\
