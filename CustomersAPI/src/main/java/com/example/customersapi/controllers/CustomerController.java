@@ -16,6 +16,11 @@ public class CustomerController {
     @Autowired
     private CustomerServiceImpl customerServiceImpl;
 
+    @PostMapping(path = "/api/customers", consumes = "application/json", produces = "application/json")
+    public Customer createCustomer(@Valid @RequestBody Customer customer){
+        return customerServiceImpl.save(customer);
+    }
+
     @GetMapping(path = "/api/customers", consumes = "application/json", produces = "application/json")
     public List<Customer> listCustomers(){
         return customerServiceImpl.findCustomersByIsActiveTrue();
@@ -26,20 +31,15 @@ public class CustomerController {
         return customerServiceImpl.getCustomerById(id);
     }
 
+    @PutMapping(path = "/api/customers/{id}", consumes = "application/json", produces = "application/json")
+    public Customer updateCustomer(@Valid @RequestBody Customer customer, @PathVariable Integer id){
+        customerServiceImpl.updateCustomer(id, customer);
+        return customerServiceImpl.getCustomerById(id);
+    }
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "/api/customers/{id}", consumes = "application/json", produces = "application/json")
     public void deleteCustomer(@PathVariable Integer id){
         customerServiceImpl.setIsActiveFalse(id);
     }
 
-    @PostMapping(path = "/api/customers", consumes = "application/json", produces = "application/json")
-    public Customer createCustomer(@Valid @RequestBody Customer customer){
-        return customerServiceImpl.save(customer);
-    }
-
-    @PutMapping(path = "/api/customers/{id}", consumes = "application/json", produces = "application/json")
-    public Customer updateCustomer(@Valid @RequestBody Customer customer, @PathVariable Integer id){
-        customerServiceImpl.updateCustomer(id, customer);
-        return customerServiceImpl.getCustomerById(id);
-    }
 }
